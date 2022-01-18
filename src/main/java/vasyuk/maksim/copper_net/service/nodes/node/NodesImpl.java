@@ -1,6 +1,8 @@
 package vasyuk.maksim.copper_net.service.nodes.node;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,7 +19,7 @@ import vasyuk.maksim.copper_net.service.nodes.tree.NodesTree;
 @Service
 public class NodesImpl implements Nodes {
     private Map<Long, Node> nodes;
-    private NodesTree nodesTree;
+//    private NodesTree nodesTree;
     private NodesDao nodesDao;
     private NodeTypes nodeTypes;
     @Resource(name = "&node")
@@ -29,17 +31,17 @@ public class NodesImpl implements Nodes {
         this.nodeTypes = nodeTypes;
         this.nodeFactory = nodeFactory;
         this.nodes = new TreeMap<>();
-        this.nodesTree = null;
+//        this.nodesTree = null;
         initialNodes();
     }
 
-    public void updateAllNodes() {
-    }
-
     @Override
-    public Nodes getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Node> getAll() {
+        List<Node> listNodes = new ArrayList<>();
+        for(Map.Entry<Long, Node> node : nodes.entrySet()) {
+            listNodes.add(node.getValue());
+        }
+        return listNodes;
     }
 
     private void initialNodes() throws Exception {
