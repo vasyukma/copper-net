@@ -42,12 +42,6 @@ public class NodesImpl implements Nodes {
         return null;
     }
 
-    @Override
-    public NodesTree getTree() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     private void initialNodes() throws Exception {
         Map<Long, Long> children = new HashMap<>();
         for (NodeDto nodeDto : nodesDao.getAll()) {
@@ -70,5 +64,11 @@ public class NodesImpl implements Nodes {
                 childNode.setParent(parentNode);
             }
         }
+    }
+
+    @Override
+    public Node getById(Long id) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
