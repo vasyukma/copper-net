@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.dto;
+package vasyuk.maksim.copper_net.dto.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

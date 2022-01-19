@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes.node.types;
+package vasyuk.maksim.copper_net.service.nodes.types;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,8 @@
 package vasyuk.maksim.copper_net.service.nodes.node;
 
-import vasyuk.maksim.copper_net.service.nodes.node.types.NodeType;
+import java.util.List;
+
+import vasyuk.maksim.copper_net.service.nodes.types.NodeType;
 
 public interface Node {
     void setId(Long id);
@@ -10,10 +12,14 @@ public interface Node {
     void setShortName(String shortName);
 
     String getShortName();
-    
+
     void setLongName(String longName);
-    
+
     String getLongName();
+    
+    void setDescription(String description);
+    
+    String getDescription();
 
     void setType(NodeType nodeType);
 
@@ -22,4 +28,8 @@ public interface Node {
     void setParent(Node parent);
 
     Node getParent();
+
+    List<Node> getChildren();
+
+    void addChild(Node node);
 }

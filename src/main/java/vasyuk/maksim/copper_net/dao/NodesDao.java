@@ -12,4 +12,6 @@ public interface NodesDao {
     NodeDto getById(Long id);
 
     List<NodeTypeDto> getTypes();
+    
+    void save(NodeDto nodeDto);
 }

@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes.node.types;
+package vasyuk.maksim.copper_net.service.nodes.types;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

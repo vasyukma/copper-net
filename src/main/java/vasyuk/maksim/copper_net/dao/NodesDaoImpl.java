@@ -60,4 +60,17 @@ public class NodesDaoImpl implements NodesDao {
         nodeDto.description = node.getDescription();
         return nodeDto;
     }
+
+    @Override
+    public void save(NodeDto nodeDto) {
+        Node newNode = new Node();
+        newNode.setShortName(nodeDto.shortName);
+        newNode.setLongName(nodeDto.longName);
+        newNode.setDescription(nodeDto.description);
+//        newNode.setParent(nodeRepository.getById(nodeDto.parentId));
+        newNode.setType(nodeTypeRepository.getById(nodeDto.typeId));
+        
+        nodeRepository.save(newNode);
+        new String();
+    }
 }
