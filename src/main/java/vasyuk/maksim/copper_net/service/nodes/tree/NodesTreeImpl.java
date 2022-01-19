@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
@@ -18,22 +19,22 @@ import vasyuk.maksim.copper_net.service.nodes.node.Node;
 import vasyuk.maksim.copper_net.service.nodes.node.Nodes;
 
 @Service
-public class NodesTreeImpl implements NodesTree {
-    private Map<Long, Branch> nodesTree;
+public class NodesTreeImpl implements Tree {
+    private Map<Long, Branch> tree;
     private Nodes nodes;
     @Resource(name = "&branch")
     private BranchFactory branchFactory;
 
     @Autowired
     public NodesTreeImpl(Nodes nodes, BranchFactory branchFactory) throws Exception {
-        nodesTree = new TreeMap<>();
+        tree = new TreeMap<>();
         this.nodes = nodes;
         this.branchFactory = branchFactory;
         initialTree();
     }
 
     @Override
-    public NodesTree getNodesTree() {
+    public Tree getTree() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -43,45 +44,56 @@ public class NodesTreeImpl implements NodesTree {
         for (Node node : nodes.getAll()) {
 //            tmp.put(node.getId(), node);
 //            Queue<Long> path = new LinkedList<>();
-            recurse(node);
+            Stack<Node> pathToRoot = new Stack<>();
+
+//            Branch newBranch = branchFactory.getObject();
+//            newBranch.setNode(node);
+
+            generatePathToRoot(pathToRoot, node);
             
+            Branch currentBranch = getNewBranch(nodes.getById(pathToRoot.pop().getId()));
+            Branch prevBranch;
             
+            if (tree.containsKey(currentBranch.getNode().getId())) {
+                prevBranch = currentBranch;
+            } else {
+                tree.put(currentBranch.getNode().getId(), currentBranch);
+                prevBranch = currentBranch;
+            }
+            
+                
+            Branch parentBranch;
+            while (pathToRoot.size() != 0) {
+                Node currentNode = pathToRoot.pop();
+                parentBranch = currentBranch;
+                if (parentBranch.getBranches().containsKey(currentNode.getId())) {
+                    continue;
+                } else {
+                currentBranch = getNewBranch(currentNode);
+                parentBranch.getBranches().put(currentBranch.getNode().getId(), currentBranch);
+                
+                }
+            }
+
+//            recurse(node, pathToRoot);
+
         }
-        
-        while (tmp.size() != 0) {
-//            Node currentNode = tmp.remove(tmp)
-        }
-//        for(Node node : nodes.getAll()) {
-//            
-//        }
+
     }
 
-    private void recurse(Node node) throws Exception  {
-        
+    private void generatePathToRoot(Stack<Node> pathToRoot, Node node) {
         if (node.getParent() == null) {
-            if (nodesTree.containsKey(node.getId())) {
-                return;
-            } else {
-                Branch newBranch = branchFactory.getObject();
-                newBranch.setNode(node);
-                nodesTree.put(node.getId(), newBranch);
-                return;
-            }
-        } else {
-            
-        }
-        
-        if (node.getParent() == null) {
+            pathToRoot.push(node);
             return;
         } else {
-//            path.add(null)
-//            recurse(path, node);
+            pathToRoot.push(node);
+            generatePathToRoot(pathToRoot, node.getParent());
         }
     }
 
-    private void generateBranch(Node node) {
-        if (node.getParent() == null) {
-//            return node;
-        }
+    private Branch getNewBranch(Node node) throws Exception {
+        Branch newBranch = branchFactory.getObject();
+        newBranch.setNode(node);
+        return newBranch;
     }
 }

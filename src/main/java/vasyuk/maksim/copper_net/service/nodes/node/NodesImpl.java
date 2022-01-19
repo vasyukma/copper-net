@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import vasyuk.maksim.copper_net.dao.NodesDao;
 import vasyuk.maksim.copper_net.dto.dao.NodeDto;
 import vasyuk.maksim.copper_net.service.nodes.node.types.NodeTypes;
-import vasyuk.maksim.copper_net.service.nodes.tree.NodesTree;
+import vasyuk.maksim.copper_net.service.nodes.tree.Tree;
 
 @Service
 public class NodesImpl implements Nodes {
