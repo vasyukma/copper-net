@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes.node;
+package vasyuk.maksim.copper_net.service.nodes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import lombok.Getter;
 import vasyuk.maksim.copper_net.dao.NodesDao;
 import vasyuk.maksim.copper_net.dto.dao.NodeDto;
-import vasyuk.maksim.copper_net.service.nodes.types.NodeTypes;
+import vasyuk.maksim.copper_net.service.node_types.node_type.NodeTypes;
+import vasyuk.maksim.copper_net.service.nodes.node.Node;
+import vasyuk.maksim.copper_net.service.nodes.node.NodeFactory;
 
 @Service
 public class NodesImpl implements Nodes {
@@ -89,7 +91,8 @@ public class NodesImpl implements Nodes {
         nodeDto.parentId = node.getParent().getId();
         nodeDto.typeId = node.getType().getId();
         nodeDto.description = node.getDescription();
-        nodesDao.save(nodeDto);
+        node.setId(nodesDao.save(nodeDto).id);
+        nodes.put(node.getId(), node);
         nodes.get(node.getParent().getId()).addChild(node);
     }
 

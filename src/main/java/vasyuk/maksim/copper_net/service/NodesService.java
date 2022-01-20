@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes;
+package vasyuk.maksim.copper_net.service;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import lombok.Data;
-import vasyuk.maksim.copper_net.service.nodes.types.NodeType;
+import vasyuk.maksim.copper_net.service.node_types.node_type.NodeType;
 
 @Data
 public class NodeImpl implements Node {
@@ -34,5 +34,6 @@ public class NodeImpl implements Node {
     @Override
     public void addChild(Node node) {
         children.put(node.getId(), node);
+        new String();
     }
 }

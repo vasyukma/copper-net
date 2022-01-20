@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes;
+package vasyuk.maksim.copper_net.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vasyuk.maksim.copper_net.dto.service.NodeDto;
+import vasyuk.maksim.copper_net.service.node_types.node_type.NodeTypes;
+import vasyuk.maksim.copper_net.service.nodes.Nodes;
 import vasyuk.maksim.copper_net.service.nodes.node.Node;
-import vasyuk.maksim.copper_net.service.nodes.node.Nodes;
-import vasyuk.maksim.copper_net.service.nodes.types.NodeTypes;
 
 @Service
 public class NodesServiceImpl implements NodesService {

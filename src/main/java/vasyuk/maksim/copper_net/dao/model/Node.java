@@ -1,6 +1,8 @@
 package vasyuk.maksim.copper_net.dao.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -29,6 +31,7 @@ public class Node {
     @ManyToOne
     private Node parent;
     @OneToMany
+//    private List<Node> children = new ArrayList<>();
     private Set<Node> children = new HashSet<>();
     @NotNull
     private String shortName;

@@ -1,12 +1,8 @@
 package vasyuk.maksim.copper_net.dto.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class NodeTypeDto {
-    private Long id;
-    private String shortName;
-    private String description;
+    public Long id;
+    public String shortName;
+    public String longName;
+    public String description;
 }

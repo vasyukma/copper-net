@@ -2,7 +2,7 @@ package vasyuk.maksim.copper_net.service.nodes.node;
 
 import java.util.List;
 
-import vasyuk.maksim.copper_net.service.nodes.types.NodeType;
+import vasyuk.maksim.copper_net.service.node_types.node_type.NodeType;
 
 public interface Node {
     void setId(Long id);

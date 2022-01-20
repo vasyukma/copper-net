@@ -13,5 +13,5 @@ public interface NodesDao {
 
     List<NodeTypeDto> getTypes();
     
-    void save(NodeDto nodeDto);
+    NodeDto save(NodeDto nodeDto);
 }

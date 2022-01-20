@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.service.nodes.types;
+package vasyuk.maksim.copper_net.service.node_types.node_type;
 
 public interface NodeType {
     void setId(Long id);
