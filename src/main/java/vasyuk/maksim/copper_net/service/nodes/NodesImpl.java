@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.Getter;
 import vasyuk.maksim.copper_net.dao.NodesDao;
-import vasyuk.maksim.copper_net.dto.dao.NodeDto;
-import vasyuk.maksim.copper_net.service.node_types.node_type.NodeTypes;
-import vasyuk.maksim.copper_net.service.nodes.node.Node;
-import vasyuk.maksim.copper_net.service.nodes.node.NodeFactory;
+import vasyuk.maksim.copper_net.dao.nodes.dto.NodeDto;
+import vasyuk.maksim.copper_net.service.node_types.NodeTypes;
+import vasyuk.maksim.copper_net.service.nodes.factory.NodeFactory;
+import vasyuk.maksim.copper_net.service.nodes.model.Node;
 
 @Service
 public class NodesImpl implements Nodes {

@@ -2,7 +2,7 @@ package vasyuk.maksim.copper_net.service;
 
 import java.util.List;
 
-import vasyuk.maksim.copper_net.dto.service.NodeDto;
+import vasyuk.maksim.copper_net.service.nodes.dto.NodeDto;
 
 public interface NodesService {
     List<NodeDto> getChildren(Long id);

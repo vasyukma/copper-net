@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vasyuk.maksim.copper_net.dao.NodesDao;
-import vasyuk.maksim.copper_net.dto.dao.NodeTypeDto;
-import vasyuk.maksim.copper_net.service.node_types.node_type.NodeType;
-import vasyuk.maksim.copper_net.service.node_types.node_type.NodeTypeFactory;
-import vasyuk.maksim.copper_net.service.node_types.node_type.NodeTypes;
-import vasyuk.maksim.copper_net.service.nodes.node.Node;
+import vasyuk.maksim.copper_net.dao.node_types.NodeTypeDto;
+import vasyuk.maksim.copper_net.service.node_types.factory.NodeTypeFactory;
+import vasyuk.maksim.copper_net.service.node_types.model.NodeType;
+import vasyuk.maksim.copper_net.service.nodes.model.Node;
 
 @Service
 public class NodeTypesImpl implements NodeTypes {

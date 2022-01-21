@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import vasyuk.maksim.copper_net.dto.service.NodeDto;
 import vasyuk.maksim.copper_net.service.NodesService;
+import vasyuk.maksim.copper_net.service.nodes.dto.NodeDto;
 
 @RestController
 @RequestMapping("nodes")

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import vasyuk.maksim.copper_net.dto.service.NodeTypeDto;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
+import vasyuk.maksim.copper_net.service.node_types.dto.NodeTypeDto;
 
 @RestController
 @RequestMapping("node-types")
