@@ -2,11 +2,12 @@ package vasyuk.maksim.copper_net.service.node_types.dto;
 
 import org.springframework.stereotype.Service;
 
-import vasyuk.maksim.copper_net.service.common.dto.DtoConvert;
+
+import vasyuk.maksim.copper_net.service.common.dto.DtoConverter;
 import vasyuk.maksim.copper_net.service.node_types.model.NodeType;
 
 @Service
-public class NodeTypeDtoConvert implements DtoConvert<NodeType, NodeTypeDto> {
+public class NodeTypeDtoServiceConverter implements DtoConverter<NodeType, NodeTypeDto> {
     @Override
     public NodeTypeDto toDto(NodeType model, NodeTypeDto dto) {
         dto.id = model.getId();

@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
 import vasyuk.maksim.copper_net.service.node_types.NodeTypes;
 import vasyuk.maksim.copper_net.service.node_types.dto.NodeTypeDto;
-import vasyuk.maksim.copper_net.service.node_types.dto.NodeTypeDtoConvert;
+import vasyuk.maksim.copper_net.service.node_types.dto.NodeTypeDtoServiceConverter;
 import vasyuk.maksim.copper_net.service.node_types.model.NodeType;
 
 @Service
 public class NodeTypesServiceImpl implements NodeTypesService<NodeTypeDto> {
     private NodeTypes nodeTypes;
-    private NodeTypeDtoConvert nodeTypeDtoConvert;
+    private NodeTypeDtoServiceConverter nodeTypeDtoServiceConverter;
 
     @Autowired
-    public NodeTypesServiceImpl(NodeTypes nodeTypes, NodeTypeDtoConvert nodeTypeDtoConvert) {
+    public NodeTypesServiceImpl(NodeTypes nodeTypes, NodeTypeDtoServiceConverter nodeTypeDtoServiceConverter) {
         this.nodeTypes = nodeTypes;
-        this.nodeTypeDtoConvert = nodeTypeDtoConvert;
+        this.nodeTypeDtoServiceConverter = nodeTypeDtoServiceConverter;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class NodeTypesServiceImpl implements NodeTypesService<NodeTypeDto> {
 //            nodeTypeDto.shortName = nodeType.getShortName();
 //            nodeTypeDto.longName = nodeType.getLongName();
 //            nodeTypeDto.description = nodeType.getDescription();
-            result.add(nodeTypeDtoConvert.toDto(nodeType, new NodeTypeDto()));
+            result.add(nodeTypeDtoServiceConverter.toDto(nodeType, new NodeTypeDto()));
 //            result.add(nodeTypeDto);
         }
         return result;
@@ -51,7 +51,7 @@ public class NodeTypesServiceImpl implements NodeTypesService<NodeTypeDto> {
 //        nodeTypeDto.shortName = nodeType.getShortName();
 //        nodeTypeDto.longName = nodeType.getLongName();
 //        nodeTypeDto.description = nodeType.getDescription();
-        return nodeTypeDtoConvert.toDto(nodeTypes.getById(id), new NodeTypeDto());
+        return nodeTypeDtoServiceConverter.toDto(nodeTypes.getById(id), new NodeTypeDto());
 //        return nodeTypeDto;
     }
 }

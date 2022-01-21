@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import vasyuk.maksim.copper_net.dao.node_types.NodeTypesRepository;
 import vasyuk.maksim.copper_net.dao.nodes.Node;
 import vasyuk.maksim.copper_net.dao.nodes.NodesRepository;
-import vasyuk.maksim.copper_net.service.common.dto.DtoConvert;
+import vasyuk.maksim.copper_net.service.common.dto.DtoConverter;
 
 @Service
-public class NodeDtoConvert implements DtoConvert<Node, NodeDto> {
+public class NodeDtoConverter implements DtoConverter<Node, NodeDto> {
     private NodesRepository nodesRepository;
     private NodeTypesRepository nodeTypesRepository;
 
     @Autowired
-    protected NodeDtoConvert(NodesRepository nodesRepository, NodeTypesRepository nodeTypesRepository) {
+    protected NodeDtoConverter(NodesRepository nodesRepository, NodeTypesRepository nodeTypesRepository) {
         super();
         this.nodesRepository = nodesRepository;
         this.nodeTypesRepository = nodeTypesRepository;

@@ -20,8 +20,8 @@ import vasyuk.maksim.copper_net.service.nodes.dto.NodeDto;
 @RequestMapping("nodes")
 public class NodesController {
     @Autowired
-    NodesService nodesService;
-
+    private NodesService nodesService;
+    
     @GetMapping("root")
     public ResponseEntity<NodeDto> getRootNode() {
         return new ResponseEntity<>(nodesService.getRoot(), HttpStatus.OK);

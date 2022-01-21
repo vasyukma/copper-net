@@ -13,9 +13,9 @@ public class HelloController {
 //    
 //    @Autowired
 //    private NodesDao nodesDao;
-    @Autowired
-    private NodeTypes nodeTypes; 
-    
+//    @Autowired
+//    private NodeTypes nodeTypes; 
+//    
     @GetMapping("/")
     public ResponseEntity<String> sayHello() {
 //        TestDto testDto = new TestDto();
