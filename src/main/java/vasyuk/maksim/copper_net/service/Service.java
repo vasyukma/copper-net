@@ -5,7 +5,9 @@ import java.util.List;
 interface Service<DTO> {
     List<DTO> getAll();
 
-    DTO getById(Long id);
+    DTO get(Long id);
 
-    DTO add(DTO item) throws Exception;
+    DTO post(DTO dto);
+    
+    DTO put(DTO dto);
 }

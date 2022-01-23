@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import vasyuk.maksim.copper_net.dto.node.NodeDtoCommon;
+import vasyuk.maksim.copper_net.dto.node.NodeDto;
 import vasyuk.maksim.copper_net.dto.node.NodeDtoRoot;
 import vasyuk.maksim.copper_net.service.NodesService;
 
 @RestController
-@RequestMapping("nodes")
+@RequestMapping("api/v0/nodes")
 public class NodesController {
     @Autowired
     private NodesService nodesService;
@@ -29,18 +29,24 @@ public class NodesController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<NodeDtoCommon> getNode(@PathVariable Long id) {
-        return new ResponseEntity<>(nodesService.getById(id), HttpStatus.OK);
+    public ResponseEntity<NodeDto> getNode(@PathVariable Long id) {
+        return new ResponseEntity<>(nodesService.get(id), HttpStatus.OK);
     }
 
     @GetMapping("{id}/children")
-    public ResponseEntity<List<NodeDtoCommon>> getChildren(@PathVariable Long id) {
+    public ResponseEntity<List<NodeDto>> getChildren(@PathVariable Long id) {
         return new ResponseEntity<>(nodesService.getChildren(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity<String> post(@RequestBody NodeDtoCommon nodeDto) throws Exception {
-        nodesService.add(nodeDto);
+    public @ResponseBody ResponseEntity<String> post(@RequestBody NodeDto nodeDto) throws Exception {
+        nodesService.post(nodeDto);
         return new ResponseEntity<String>("POST Response", HttpStatus.OK);
     }
+    
+//    @PutMapping
+//    public @ResponseBody ResponseEntity<String> post(@RequestBody NodeDtoCommon nodeDto) throws Exception {
+//        nodesService.post(nodeDto);
+//        return new ResponseEntity<String>("POST Response", HttpStatus.OK);
+//    }
 }

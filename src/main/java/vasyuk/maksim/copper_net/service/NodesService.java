@@ -2,11 +2,11 @@ package vasyuk.maksim.copper_net.service;
 
 import java.util.List;
 
-import vasyuk.maksim.copper_net.dto.node.NodeDtoCommon;
+import vasyuk.maksim.copper_net.dto.node.NodeDto;
 import vasyuk.maksim.copper_net.dto.node.NodeDtoRoot;
 
-public interface NodesService extends Service<NodeDtoCommon> {
-    List<NodeDtoCommon> getChildren(Long parentId);
+public interface NodesService extends Service<NodeDto> {
+    List<NodeDto> getChildren(Long parentId);
 
     NodeDtoRoot getRoot();
 }

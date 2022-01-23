@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vasyuk.maksim.copper_net.dto.node.NodeDtoCommon;
+import vasyuk.maksim.copper_net.dto.node.NodeDto;
 import vasyuk.maksim.copper_net.dto.node.NodeDtoRoot;
 import vasyuk.maksim.copper_net.repository.NodesRepository;
 import vasyuk.maksim.copper_net.repository.model.Node;
@@ -28,8 +28,8 @@ class NodesServiceImpl implements NodesService {
     }
 
     @Override
-    public List<NodeDtoCommon> getChildren(Long parentId) {
-        List<NodeDtoCommon> result = new ArrayList<>();
+    public List<NodeDto> getChildren(Long parentId) {
+        List<NodeDto> result = new ArrayList<>();
         for (Node model : repository.findByParentId(parentId)) {
             result.add(commonDtoConverter.toDto(model));
         }
@@ -37,7 +37,7 @@ class NodesServiceImpl implements NodesService {
     }
 
     @Override
-    public NodeDtoCommon getById(Long id) {
+    public NodeDto get(Long id) {
         return commonDtoConverter.toDto(repository.getById(id));
     }
 
@@ -47,12 +47,18 @@ class NodesServiceImpl implements NodesService {
     }
 
     @Override
-    public NodeDtoCommon add(NodeDtoCommon nodeDto) throws Exception {
+    public NodeDto post(NodeDto nodeDto) {
         return null;
     }
 
     @Override
-    public List<NodeDtoCommon> getAll() {
+    public List<NodeDto> getAll() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public NodeDto put(NodeDto dto) {
         // TODO Auto-generated method stub
         return null;
     }
