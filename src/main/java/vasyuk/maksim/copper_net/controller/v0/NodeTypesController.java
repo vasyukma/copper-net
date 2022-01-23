@@ -9,23 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDtoCommon;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
-import vasyuk.maksim.copper_net.service.node_types.dto.NodeTypeDto;
 
 @RestController
 @RequestMapping("node-types")
 public class NodeTypesController {
-
-    private NodeTypesService<NodeTypeDto> nodeTypesService;
+    private NodeTypesService nodeTypesService;
 
     @Autowired
-    public NodeTypesController(NodeTypesService<NodeTypeDto> nodeTypesService) {
-        super();
+    public NodeTypesController(NodeTypesService nodeTypesService) {
         this.nodeTypesService = nodeTypesService;
     }
 
     @GetMapping
-    private ResponseEntity<List<NodeTypeDto>> getAll() {
-        return new ResponseEntity<List<NodeTypeDto>>(nodeTypesService.getAll(), HttpStatus.OK);
+    private ResponseEntity<List<NodeTypeDtoCommon>> getAll() {
+        return new ResponseEntity<List<NodeTypeDtoCommon>>(nodeTypesService.getAll(), HttpStatus.OK);
     }
 }

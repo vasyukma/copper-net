@@ -1,12 +1,6 @@
 package vasyuk.maksim.copper_net.service;
 
-import java.util.List;
+import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDtoCommon;
 
-public interface NodeTypesService<T> {
-    List<T> getAll();
-    
-    T getById(Long id);
-
-    void add(T item);
-
+public interface NodeTypesService extends CommonService<NodeTypeDtoCommon> {
 }
