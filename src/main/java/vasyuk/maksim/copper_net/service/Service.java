@@ -2,7 +2,7 @@ package vasyuk.maksim.copper_net.service;
 
 import java.util.List;
 
-interface CommonService<DTO> {
+interface Service<DTO> {
     List<DTO> getAll();
 
     DTO getById(Long id);

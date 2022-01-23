@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vasyuk.maksim.copper_net.dto.node.NodeDtoCommon;
+import vasyuk.maksim.copper_net.dto.node.NodeDtoRoot;
 import vasyuk.maksim.copper_net.service.NodesService;
 
 @RestController
@@ -21,9 +22,9 @@ import vasyuk.maksim.copper_net.service.NodesService;
 public class NodesController {
     @Autowired
     private NodesService nodesService;
-    
+
     @GetMapping("root")
-    public ResponseEntity<NodeDtoCommon> getRootNode() {
+    public ResponseEntity<NodeDtoRoot> getRootNode() {
         return new ResponseEntity<>(nodesService.getRoot(), HttpStatus.OK);
     }
 
@@ -36,7 +37,7 @@ public class NodesController {
     public ResponseEntity<List<NodeDtoCommon>> getChildren(@PathVariable Long id) {
         return new ResponseEntity<>(nodesService.getChildren(id), HttpStatus.OK);
     }
-    
+
     @PostMapping
     public @ResponseBody ResponseEntity<String> post(@RequestBody NodeDtoCommon nodeDto) throws Exception {
         nodesService.add(nodeDto);
