@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.dto.node_type;
+package vasyuk.maksim.copper_net.dto;
 
 import lombok.Value;
 

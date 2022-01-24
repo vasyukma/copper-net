@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.repository.model;
+package vasyuk.maksim.copper_net.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

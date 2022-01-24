@@ -5,9 +5,9 @@ import java.util.List;
 interface Service<DTO> {
     List<DTO> getAll();
 
-    DTO get(Long id);
+    DTO getById(Long id);
 
-    DTO post(DTO dto);
+    DTO create(DTO dto);
     
-    DTO put(DTO dto);
+    DTO update(DTO dto);
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDto;
+import vasyuk.maksim.copper_net.dto.NodeTypeDto;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
 
 @RestController
@@ -34,16 +34,16 @@ public class NodeTypesController {
 
     @GetMapping("{id}")
     public @ResponseBody ResponseEntity<NodeTypeDto> get(@PathVariable Long id) {
-        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public @ResponseBody ResponseEntity<NodeTypeDto> post(@RequestBody NodeTypeDto dto) {
-        return new ResponseEntity<NodeTypeDto>(service.post(dto), HttpStatus.OK);
+        return new ResponseEntity<NodeTypeDto>(service.create(dto), HttpStatus.OK);
     }
 
     @PutMapping
     public @ResponseBody ResponseEntity<NodeTypeDto> put(@RequestBody NodeTypeDto dto) {
-        return new ResponseEntity<NodeTypeDto>(service.put(dto), HttpStatus.OK);
+        return new ResponseEntity<NodeTypeDto>(service.update(dto), HttpStatus.OK);
     }
 }

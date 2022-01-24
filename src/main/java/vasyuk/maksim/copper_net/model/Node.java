@@ -1,4 +1,4 @@
-package vasyuk.maksim.copper_net.repository.model;
+package vasyuk.maksim.copper_net.model;
 
 import java.util.HashSet;
 import java.util.Set;
