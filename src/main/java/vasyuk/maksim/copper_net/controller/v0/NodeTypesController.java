@@ -14,18 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDtoDep;
-import vasyuk.maksim.copper_net.dto.node_type.NodeTypeMapper;
+import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDto;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
 
 @RestController
 @RequestMapping("api/v0/node-types")
 public class NodeTypesController {
     private NodeTypesService service;
-//    private NodeTypeMapper mapper;
-//
-//    @Autowired
-//    private NodeTypeMapper mapper;
 
     @Autowired
     public NodeTypesController(NodeTypesService nodeTypesService) {
@@ -33,26 +28,22 @@ public class NodeTypesController {
     }
 
     @GetMapping
-    private ResponseEntity<List<NodeTypeDtoDep>> getAll() {
-        return new ResponseEntity<List<NodeTypeDtoDep>>(service.getAll(), HttpStatus.OK);
+    private ResponseEntity<List<NodeTypeDto>> getAll() {
+        return new ResponseEntity<List<NodeTypeDto>>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public @ResponseBody ResponseEntity<String> get(@PathVariable Long id) {
-
-//        Car car = new Car();
-//        car.setId(11111L);
-//        CarDto carDto = CarMapper.INSTANCE.carToCarDto(car);
-        return new ResponseEntity<String>(String.join(id.toString(), " get"), HttpStatus.OK);
+    public @ResponseBody ResponseEntity<NodeTypeDto> get(@PathVariable Long id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity<NodeTypeDtoDep> post(@RequestBody NodeTypeDtoDep dto) {
-        return new ResponseEntity<NodeTypeDtoDep>(service.post(dto), HttpStatus.OK);
+    public @ResponseBody ResponseEntity<NodeTypeDto> post(@RequestBody NodeTypeDto dto) {
+        return new ResponseEntity<NodeTypeDto>(service.post(dto), HttpStatus.OK);
     }
 
     @PutMapping
-    public @ResponseBody ResponseEntity<NodeTypeDtoDep> put(@RequestBody NodeTypeDtoDep dto) {
-        return new ResponseEntity<NodeTypeDtoDep>(service.put(dto), HttpStatus.OK);
+    public @ResponseBody ResponseEntity<NodeTypeDto> put(@RequestBody NodeTypeDto dto) {
+        return new ResponseEntity<NodeTypeDto>(service.put(dto), HttpStatus.OK);
     }
 }

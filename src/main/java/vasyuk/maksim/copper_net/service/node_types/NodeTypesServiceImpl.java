@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDtoDep;
+import vasyuk.maksim.copper_net.dto.node_type.NodeTypeDto;
 import vasyuk.maksim.copper_net.dto.node_type.NodeTypeMapper;
 import vasyuk.maksim.copper_net.repository.NodeTypesRepository;
 import vasyuk.maksim.copper_net.repository.model.NodeType;
@@ -16,48 +16,38 @@ import vasyuk.maksim.copper_net.service.NodeTypesService;
 class NodeTypesServiceImpl implements NodeTypesService {
     private NodeTypesRepository repository;
     private NodeTypeMapper mapper;
-    private NodeTypeDtoConverterImpl dtoConverter;
-    
+
     @Autowired
-    public NodeTypesServiceImpl(NodeTypesRepository repository, NodeTypeDtoConverterImpl nodeTypeDtoServiceConverter,
-            NodeTypeMapper mapper) {
-        this.dtoConverter = nodeTypeDtoServiceConverter;
+    public NodeTypesServiceImpl(NodeTypesRepository repository, NodeTypeMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
     public List<NodeTypeDto> getAll() {
-        List<NodeTypeDtoDep> result = new ArrayList<>();
-        for (NodeType nodeType : repository.findAll()) {
-            result.add(dtoConverter.toDto(nodeType));
+        List<NodeTypeDto> result = new ArrayList<>();
+        for (NodeType model : repository.findAll()) {
+            result.add(mapper.map(model));
         }
         return result;
     }
 
     @Override
-    public NodeTypeMapper get(Long id) {
-//        repository.getById(id);
-        return dtoConverter.toDto(repository.getById(id));
+    public NodeTypeDto get(Long id) {
+        return mapper.map(repository.getById(id));
     }
 
     @Override
-    public NodeTypeDtoDep post(NodeTypeDtoDep dto) {
-        return dtoConverter.toDto(repository.save(dtoConverter.toModel(dto)));
+    public NodeTypeDto post(NodeTypeDto dto) {
+        return mapper.map(repository.save(mapper.map(dto)));
     }
-//    @Override
-//    public NodeTypeDtoCommon add(NodeTypeDtoCommon dto) {
-//        return dtoConverter.toDto(repository.save(dtoConverter.toModel(dto)));
-//    }
 
     @Override
-    public NodeTypeDtoDep put(NodeTypeDtoDep dto) {
-        // TODO Auto-generated method stub
+    public NodeTypeDto put(NodeTypeDto dto) {
         NodeType model = repository.getById(dto.getId());
         model.setShortName(dto.getShortName());
         model.setLongName(dto.getLongName());
         model.setDescription(dto.getDescription());
-//        repository.save(model);
-        return dtoConverter.toDto(repository.save(model));
+        return mapper.map(repository.save(model));
     }
 }
