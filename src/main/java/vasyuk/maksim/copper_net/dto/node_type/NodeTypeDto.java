@@ -4,8 +4,8 @@ import lombok.Value;
 
 @Value
 public class NodeTypeDto implements NodeTypeDtoDep {
-    Long id;
-    String shortName;
-    String longName;
-    String description;
+    private Long id;
+    private String shortName;
+    private String longName;
+    private String description;
 }

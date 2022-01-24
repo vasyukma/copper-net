@@ -15,19 +15,19 @@ import vasyuk.maksim.copper_net.service.NodeTypesService;
 @Service
 class NodeTypesServiceImpl implements NodeTypesService {
     private NodeTypesRepository repository;
+    private NodeTypeMapper mapper;
     private NodeTypeDtoConverterImpl dtoConverter;
     
     @Autowired
-    private NodeTypeMapper mapper;
-
-    @Autowired
-    public NodeTypesServiceImpl(NodeTypesRepository repository, NodeTypeDtoConverterImpl nodeTypeDtoServiceConverter) {
+    public NodeTypesServiceImpl(NodeTypesRepository repository, NodeTypeDtoConverterImpl nodeTypeDtoServiceConverter,
+            NodeTypeMapper mapper) {
         this.dtoConverter = nodeTypeDtoServiceConverter;
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
-    public List<NodeTypeDtoDep> getAll() {
+    public List<NodeTypeDto> getAll() {
         List<NodeTypeDtoDep> result = new ArrayList<>();
         for (NodeType nodeType : repository.findAll()) {
             result.add(dtoConverter.toDto(nodeType));
@@ -36,7 +36,8 @@ class NodeTypesServiceImpl implements NodeTypesService {
     }
 
     @Override
-    public NodeTypeDtoDep get(Long id) {
+    public NodeTypeMapper get(Long id) {
+//        repository.getById(id);
         return dtoConverter.toDto(repository.getById(id));
     }
 
