@@ -12,35 +12,35 @@ import vasyuk.maksim.copper_net.repository.NodesRepository;
 
 @Service
 class NodesServiceImpl implements NodesService {
-    private NodesRepository nodesRepository;
+    private NodesRepository repository;
     private NodeMapper mapper;
 
     @Autowired
     private NodesServiceImpl(NodesRepository nodesRepository, 
             NodeMapper mapper) {
         super();
-        this.nodesRepository = nodesRepository;
+        this.repository = nodesRepository;
         this.mapper = mapper;
     }
 
     @Override
     public List<NodeDto> getChildren(Long parentId) {
-        return mapper.map(nodesRepository.findByParentId(parentId));
+        return mapper.map(repository.findByParentId(parentId));
     }
 
     @Override
     public NodeDto getById(Long id) {
-        return mapper.map(nodesRepository.getById(id));
+        return mapper.map(repository.getById(id));
     }
 
     @Override
     public NodeDto getRoot() {
-        return mapper.map(nodesRepository.getRoot());
+        return mapper.map(repository.getRoot());
     }
 
     @Override
     public NodeDto create(NodeDto dto) {
-        return mapper.map(nodesRepository.save(mapper.map(dto)));
+        return mapper.map(repository.save(mapper.map(dto)));
     }
 
     @Override
@@ -51,8 +51,8 @@ class NodesServiceImpl implements NodesService {
 
     @Override
     public NodeDto update(NodeDto dto) {
-        Node model = nodesRepository.getById(dto.getId());
+        Node model = repository.getById(dto.getId());
         mapper.updateModel(dto, model);
-        return mapper.map(nodesRepository.save(model));
+        return mapper.map(repository.save(model));
     }
 }
