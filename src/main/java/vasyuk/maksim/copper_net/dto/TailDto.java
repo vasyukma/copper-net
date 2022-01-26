@@ -6,4 +6,5 @@ import lombok.Value;
 public class TailDto {
     private Long id;
     private Long nodeId;
+    private Long linkId;
 }

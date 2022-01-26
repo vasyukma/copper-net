@@ -5,44 +5,55 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vasyuk.maksim.copper_net.dto.LinkDto;
+import vasyuk.maksim.copper_net.dto.TailDto;
 import vasyuk.maksim.copper_net.mapper.LinkMapper;
+import vasyuk.maksim.copper_net.mapper.TailMapper;
 import vasyuk.maksim.copper_net.model.Link;
 import vasyuk.maksim.copper_net.repository.LinksRepository;
+import vasyuk.maksim.copper_net.repository.TailsRepository;
 
 @org.springframework.stereotype.Service
 public class LinksServiceImpl implements LinksService {
-
-    private LinksRepository repository;
-    private LinkMapper mapper;
+    private LinksRepository linksRepository;
+    private TailsRepository tailsRepository;
+    private LinkMapper linkMapper;
+    private TailMapper tailMapper;
 
     @Autowired
-    public LinksServiceImpl(LinksRepository repository, LinkMapper mapper) {
+    public LinksServiceImpl(LinksRepository linksRepository, TailsRepository tailsRepository, LinkMapper linkMapper,
+            TailMapper tailMapper) {
         super();
-        this.repository = repository;
-        this.mapper = mapper;
+        this.linksRepository = linksRepository;
+        this.tailsRepository = tailsRepository;
+        this.linkMapper = linkMapper;
+        this.tailMapper = tailMapper;
     }
 
     @Override
     public List<LinkDto> getAll() {
-        return mapper.map(repository.findAll());
+        return linkMapper.map(linksRepository.findAll());
     }
 
     @Override
     public LinkDto getById(Long id) {
-        return mapper.map(repository.getById(id));
+        return linkMapper.map(linksRepository.getById(id));
     }
 
     @Override
     public LinkDto create(LinkDto dto) {
-        return mapper.map(repository.save(mapper.map(dto)));
+        return linkMapper.map(linksRepository.save(linkMapper.map(dto)));
     }
 
     @Override
     public LinkDto update(LinkDto dto) {
-        Link model = repository.getById(dto.getId());
-        mapper.updateModel(dto, model);
-        model = repository.save(model);
-        return mapper.map(model);
+        Link model = linksRepository.getById(dto.getId());
+        linkMapper.updateModel(dto, model);
+        model = linksRepository.save(model);
+        return linkMapper.map(model);
     }
 
+    @Override
+    public List<TailDto> getChildren(Long linkId) {
+        return tailMapper.map(tailsRepository.findByLinkId(linkId));
+    }
 }

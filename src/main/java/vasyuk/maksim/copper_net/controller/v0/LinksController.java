@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vasyuk.maksim.copper_net.dto.LinkDto;
+import vasyuk.maksim.copper_net.dto.TailDto;
 import vasyuk.maksim.copper_net.service.LinksService;
 
 @RestController
@@ -27,7 +28,7 @@ public class LinksController {
         super();
         this.service = service;
     }
-    
+
     @GetMapping
     private ResponseEntity<List<LinkDto>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
@@ -36,6 +37,11 @@ public class LinksController {
     @GetMapping("{id}")
     public @ResponseBody ResponseEntity<LinkDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}/tails")
+    public ResponseEntity<List<TailDto>> getChildren(@PathVariable Long id) {
+        return new ResponseEntity<>(service.getChildren(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -47,5 +53,4 @@ public class LinksController {
     public @ResponseBody ResponseEntity<LinkDto> put(@RequestBody LinkDto dto) {
         return new ResponseEntity<LinkDto>(service.update(dto), HttpStatus.OK);
     }
-
 }

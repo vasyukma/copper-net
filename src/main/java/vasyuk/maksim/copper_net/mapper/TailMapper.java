@@ -9,28 +9,28 @@ import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vasyuk.maksim.copper_net.dto.TailDto;
+import vasyuk.maksim.copper_net.model.Link;
 import vasyuk.maksim.copper_net.model.Node;
 import vasyuk.maksim.copper_net.model.Tail;
+import vasyuk.maksim.copper_net.repository.LinksRepository;
 import vasyuk.maksim.copper_net.repository.NodesRepository;
 
 @Mapper
 public abstract class TailMapper {
-
-//    @Autowired
-//    private LinksRepository linksRepository;
-
+    @Autowired
+    private LinksRepository linksRepository;
     @Autowired
     private NodesRepository nodesRepository;
 
-//    @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
+    @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
     @Mapping(source = "nodeId", target = "node", qualifiedByName = "get_node")
     public abstract Tail map(TailDto dto);
 
-//    @Named("get_link")
-//    public Link getLink(Long id) {
-//        Link model = linksRepository.getById(id);
-//        return model;
-//    }
+    @Named("get_link")
+    public Link getLink(Long id) {
+        Link model = linksRepository.getById(id);
+        return model;
+    }
 
     @Named("get_node")
     public Node getNode(Long id) {
@@ -38,13 +38,13 @@ public abstract class TailMapper {
         return model;
     }
 
-//    @Mapping(source = "link.id", target = "linkId")
+    @Mapping(source = "link.id", target = "linkId")
     @Mapping(source = "node.id", target = "nodeId")
     public abstract TailDto map(Tail entity);
 
     public abstract List<TailDto> map(List<Tail> models);
 
-//    @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
+    @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
     @Mapping(source = "nodeId", target = "node", qualifiedByName = "get_node")
     public abstract void updateModel(TailDto dto, @MappingTarget Tail model);
 }
