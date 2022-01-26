@@ -43,5 +43,7 @@ public abstract class NodeMapper {
 
     public abstract List<NodeDto> map(List<Node> models);
 
+    @Mapping(source = "typeId", target = "type", qualifiedByName = "get_node_type")
+    @Mapping(source = "parentId", target = "parent", qualifiedByName = "get_node")
     public abstract void updateModel(NodeDto dto, @MappingTarget Node model);
 }
