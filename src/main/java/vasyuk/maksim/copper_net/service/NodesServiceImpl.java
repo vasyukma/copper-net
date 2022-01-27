@@ -16,8 +16,7 @@ class NodesServiceImpl implements NodesService {
     private NodeMapper mapper;
 
     @Autowired
-    private NodesServiceImpl(NodesRepository nodesRepository, 
-            NodeMapper mapper) {
+    private NodesServiceImpl(NodesRepository nodesRepository, NodeMapper mapper) {
         super();
         this.repository = nodesRepository;
         this.mapper = mapper;
@@ -36,7 +35,7 @@ class NodesServiceImpl implements NodesService {
     @Override
     public NodeDto getRoot() {
         Node model = repository.getRoot();
-        NodeDto dto = mapper.map(model); 
+        NodeDto dto = mapper.map(model);
         return dto;
     }
 
@@ -47,7 +46,6 @@ class NodesServiceImpl implements NodesService {
 
     @Override
     public List<NodeDto> getAll() {
-        // TODO Auto-generated method stub
         return null;
     }
 
