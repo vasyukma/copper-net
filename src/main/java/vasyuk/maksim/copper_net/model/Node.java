@@ -26,6 +26,7 @@ public class Node {
     @ManyToOne
     @NotNull
     private NodeType type;
+    @NotNull
     @ManyToOne
     private Node parent;
     @OneToMany

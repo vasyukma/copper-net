@@ -35,7 +35,9 @@ class NodesServiceImpl implements NodesService {
 
     @Override
     public NodeDto getRoot() {
-        return mapper.map(repository.getRoot());
+        Node model = repository.getRoot();
+        NodeDto dto = mapper.map(model); 
+        return dto;
     }
 
     @Override
