@@ -1,0 +1,29 @@
+spring:
+ profiles:
+   active: dev
+---
+spring:
+    profiles: dev
+    datasource:
+        url: jdbc:postgresql://localhost:5432/copper-sk-dev
+        username: copper-sk-dev
+        password: copper-sk-dev
+    #drop n create table again, good for testing, comment this in production
+    jpa:
+        hibernate:
+            ddl-auto: update
+server:
+    port: 8080
+---
+spring:
+    profiles: prod
+    datasource:
+        url: jdbc:postgresql://localhost:5432/copper-sk-dev
+        username: copper-sk-dev
+        password: copper-sk-dev
+    #drop n create table again, good for testing, comment this in production
+    jpa:
+        hibernate:
+            ddl-auto: update
+server:
+    port: 18090
