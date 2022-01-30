@@ -55,4 +55,16 @@ class NodesServiceImpl implements NodesService {
         mapper.updateModel(dto, model);
         return mapper.map(repository.save(model));
     }
+
+    @Override
+    public Long getParentsCount(Long nodeId) {
+        Integer count = 0;
+        Long rootId = repository.getRoot().getId();
+        Node currentNode = repository.getById(nodeId);
+        while (rootId != currentNode.getId()) {
+            count++;
+            currentNode = repository.getById(currentNode.getParent().getId());
+        }
+        return count.longValue();
+    }
 }
