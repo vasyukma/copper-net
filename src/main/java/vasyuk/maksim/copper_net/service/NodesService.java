@@ -8,4 +8,6 @@ public interface NodesService extends Service<NodeDto> {
     List<NodeDto> getChildren(Long parentId);
 
     NodeDto getRoot();
+    
+    Long getParentsCount(Long nodeId);
 }
