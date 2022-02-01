@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vasyuk.maksim.copper_net.dto.ForUpdateNodeDto;
 import vasyuk.maksim.copper_net.dto.NodeDto;
+import vasyuk.maksim.copper_net.mapper.ForUpdateNodeMapper;
 import vasyuk.maksim.copper_net.mapper.NodeMapper;
 import vasyuk.maksim.copper_net.model.Node;
 import vasyuk.maksim.copper_net.repository.NodesRepository;
@@ -13,35 +15,38 @@ import vasyuk.maksim.copper_net.repository.NodesRepository;
 @Service
 class NodesServiceImpl implements NodesService {
     private NodesRepository repository;
-    private NodeMapper mapper;
+    private NodeMapper nodeMapper;
+    private ForUpdateNodeMapper forUpdateNodeMapper;
 
     @Autowired
-    private NodesServiceImpl(NodesRepository nodesRepository, NodeMapper mapper) {
+    public NodesServiceImpl(NodesRepository repository, NodeMapper nodeMapper, ForUpdateNodeMapper nodeWithTypeMapper) {
         super();
-        this.repository = nodesRepository;
-        this.mapper = mapper;
+        this.repository = repository;
+        this.nodeMapper = nodeMapper;
+        this.forUpdateNodeMapper = nodeWithTypeMapper;
     }
 
     @Override
     public List<NodeDto> getChildren(Long parentId) {
-        return mapper.map(repository.findByParentId(parentId));
+        List<Node> list = repository.findByParentId(parentId);
+        return forUpdateNodeMapper.map(list);
     }
 
     @Override
     public NodeDto getById(Long id) {
-        return mapper.map(repository.getById(id));
+        return nodeMapper.map(repository.getById(id));
     }
 
     @Override
     public NodeDto getRoot() {
         Node model = repository.getRoot();
-        NodeDto dto = mapper.map(model);
+        NodeDto dto = nodeMapper.map(model);
         return dto;
     }
 
     @Override
-    public NodeDto create(NodeDto dto) {
-        return mapper.map(repository.save(mapper.map(dto)));
+    public NodeDto create(ForUpdateNodeDto dto) {
+        return nodeMapper.map(repository.save(forUpdateNodeMapper.map(dto)));
     }
 
     @Override
@@ -50,10 +55,10 @@ class NodesServiceImpl implements NodesService {
     }
 
     @Override
-    public NodeDto update(NodeDto dto) {
+    public NodeDto update(ForUpdateNodeDto dto) {
         Node model = repository.getById(dto.getId());
-        mapper.updateModel(dto, model);
-        return mapper.map(repository.save(model));
+        forUpdateNodeMapper.updateModel(dto, model);
+        return nodeMapper.map(repository.save(model));
     }
 
     @Override

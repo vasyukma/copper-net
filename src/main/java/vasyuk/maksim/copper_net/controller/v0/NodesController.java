@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import vasyuk.maksim.copper_net.dto.ForUpdateNodeDto;
 import vasyuk.maksim.copper_net.dto.NodeDto;
 import vasyuk.maksim.copper_net.service.NodesService;
 
@@ -42,19 +43,19 @@ public class NodesController {
     public ResponseEntity<List<NodeDto>> getChildren(@PathVariable Long id) {
         return new ResponseEntity<>(service.getChildren(id), HttpStatus.OK);
     }
-    
+
     @GetMapping("{id}/parents-count")
     public ResponseEntity<Long> getParentsCount(@PathVariable Long id) {
         return new ResponseEntity<>(service.getParentsCount(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity<NodeDto> post(@RequestBody NodeDto dto) throws Exception {
+    public @ResponseBody ResponseEntity<NodeDto> post(@RequestBody ForUpdateNodeDto dto) throws Exception {
         return new ResponseEntity<>(service.create(dto), HttpStatus.OK);
     }
 
     @PutMapping
-    public @ResponseBody ResponseEntity<NodeDto> put(@RequestBody NodeDto dto) throws Exception {
+    public @ResponseBody ResponseEntity<NodeDto> put(@RequestBody ForUpdateNodeDto dto) throws Exception {
         return new ResponseEntity<>(service.update(dto), HttpStatus.OK);
     }
 }
