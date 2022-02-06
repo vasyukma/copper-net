@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import vasyuk.maksim.copper_net.model.Link;
 
 public interface LinksRepository extends JpaRepository<Link, Long> {
-    List<Link> findByOrderByShortNameAsc();
+    List<Link> findByOrderByNameAsc();
 }

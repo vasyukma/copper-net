@@ -7,4 +7,6 @@ public class TailDto {
     private Long id;
     private Long nodeId;
     private Long linkId;
+    private String description;
+    private String path;
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import vasyuk.maksim.copper_net.dto.ForUpdateNodeDto;
 import vasyuk.maksim.copper_net.dto.NodeDto;
+import vasyuk.maksim.copper_net.dto.NodePathDto;
+import vasyuk.maksim.copper_net.dto.TextNodePathDto;
 import vasyuk.maksim.copper_net.service.NodesService;
 
 @RestController
@@ -44,6 +46,21 @@ public class NodesController {
         return new ResponseEntity<>(service.getChildren(id), HttpStatus.OK);
     }
 
+//    @GetMapping("{id}/path")
+//    public ResponseEntity<List<NodeDto>> getNodePath(@PathVariable Long id) {
+//        return new ResponseEntity<>(service.getPathDto(id), HttpStatus.OK);
+//    }
+//    
+    @GetMapping("{id}/path")
+      public ResponseEntity<NodePathDto> getNodePath(@PathVariable Long id) {
+          return new ResponseEntity<>(service.getPath(id), HttpStatus.OK);
+      }
+  
+//    @GetMapping("{id}/text-path")
+//    public ResponseEntity<TextNodePathDto> getTextNodePath(@PathVariable Long id) {
+//        return new ResponseEntity<>(service.getTextPath(id), HttpStatus.OK);
+//    }
+//    
     @GetMapping("{id}/parents-count")
     public ResponseEntity<Long> getParentsCount(@PathVariable Long id) {
         return new ResponseEntity<>(service.getParentsCount(id), HttpStatus.OK);

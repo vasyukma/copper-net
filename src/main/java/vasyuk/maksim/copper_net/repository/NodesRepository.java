@@ -13,4 +13,6 @@ public interface NodesRepository extends JpaRepository<Node, Long> {
     @Query(value = "from Node where parent_id = id")
     Node getRoot();
     
+    List<Node> findByParentIdOrderByShortNameAsc(Long id);
+    
 }

@@ -26,4 +26,7 @@ public class Tail {
     @NotNull
     @ManyToOne
     private Link link;
+    // TODO: Fill the data field adn uncomment @NotNull  
+//    @NotNull
+    private String description;
 }

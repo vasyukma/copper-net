@@ -1,5 +1,8 @@
 package vasyuk.maksim.copper_net.service;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import vasyuk.maksim.copper_net.dto.ForUpdateNodeDto;
 import vasyuk.maksim.copper_net.dto.NodeDto;
+import vasyuk.maksim.copper_net.dto.NodePathDto;
 import vasyuk.maksim.copper_net.mapper.ForUpdateNodeMapper;
 import vasyuk.maksim.copper_net.mapper.NodeMapper;
+import vasyuk.maksim.copper_net.mapper.TextNodePathMapper;
 import vasyuk.maksim.copper_net.model.Node;
 import vasyuk.maksim.copper_net.repository.NodesRepository;
 
@@ -17,19 +22,24 @@ class NodesServiceImpl implements NodesService {
     private NodesRepository repository;
     private NodeMapper nodeMapper;
     private ForUpdateNodeMapper forUpdateNodeMapper;
-
-    @Autowired
-    public NodesServiceImpl(NodesRepository repository, NodeMapper nodeMapper, ForUpdateNodeMapper nodeWithTypeMapper) {
-        super();
-        this.repository = repository;
-        this.nodeMapper = nodeMapper;
-        this.forUpdateNodeMapper = nodeWithTypeMapper;
-    }
+    private TextNodePathMapper textNodePathMapper;
 
     @Override
     public List<NodeDto> getChildren(Long parentId) {
-        List<Node> list = repository.findByParentId(parentId);
-        return forUpdateNodeMapper.map(list);
+//        List<Node> list = repository.findByParentId(parentId);
+        
+//        return forUpdateNodeMapper.map(list);
+        return forUpdateNodeMapper.map(repository.findByParentIdOrderByShortNameAsc(parentId));
+    }
+
+    @Autowired
+    public NodesServiceImpl(NodesRepository repository, NodeMapper nodeMapper, ForUpdateNodeMapper forUpdateNodeMapper,
+            TextNodePathMapper textNodePathMapper) {
+        super();
+        this.repository = repository;
+        this.nodeMapper = nodeMapper;
+        this.forUpdateNodeMapper = forUpdateNodeMapper;
+        this.textNodePathMapper = textNodePathMapper;
     }
 
     @Override
@@ -71,5 +81,28 @@ class NodesServiceImpl implements NodesService {
             currentNode = repository.getById(currentNode.getParent().getId());
         }
         return count.longValue();
+    }
+
+    @Override
+    public NodePathDto getPath(Long nodeId) {
+        StringBuilder path = new StringBuilder();
+        Deque<Node> modelDeque = new ArrayDeque<>();
+        Long rootId = repository.getRoot().getId();
+        Node currentNode = repository.getById(nodeId);
+        modelDeque.add(currentNode);
+        while (rootId != currentNode.getId()) {
+            currentNode = repository.getById(currentNode.getParent().getId());
+            modelDeque.add(currentNode);
+        }
+        List<NodeDto> dtoList = nodeMapper.map(new ArrayList<>(modelDeque));
+        while (!modelDeque.isEmpty()) {
+            currentNode = modelDeque.pollFirst();
+            path.append(currentNode.getType().getShortName());
+            path.append("-");
+            path.append(currentNode.getShortName());
+            path.append(':');
+        }
+        NodePathDto dto = new NodePathDto(path.toString(), dtoList);
+        return dto;
     }
 }

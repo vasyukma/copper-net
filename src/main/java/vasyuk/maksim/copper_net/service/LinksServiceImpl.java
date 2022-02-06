@@ -32,7 +32,7 @@ public class LinksServiceImpl implements LinksService {
     @Override
     public List<LinkDto> getAll() {
 //        return linkMapper.map(linksRepository.findAll());
-        return linkMapper.map(linksRepository.findByOrderByShortNameAsc());
+        return linkMapper.map(linksRepository.findByOrderByNameAsc());
     }
 
     @Override

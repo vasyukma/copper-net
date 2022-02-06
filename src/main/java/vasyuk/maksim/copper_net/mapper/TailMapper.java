@@ -14,6 +14,7 @@ import vasyuk.maksim.copper_net.model.Node;
 import vasyuk.maksim.copper_net.model.Tail;
 import vasyuk.maksim.copper_net.repository.LinksRepository;
 import vasyuk.maksim.copper_net.repository.NodesRepository;
+import vasyuk.maksim.copper_net.service.NodesService;
 
 @Mapper
 public abstract class TailMapper {
@@ -21,6 +22,8 @@ public abstract class TailMapper {
     private LinksRepository linksRepository;
     @Autowired
     private NodesRepository nodesRepository;
+//    @Autowired
+//    private NodesService nodesService;
 
     @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
     @Mapping(source = "nodeId", target = "node", qualifiedByName = "get_node")
@@ -40,9 +43,16 @@ public abstract class TailMapper {
 
     @Mapping(source = "link.id", target = "linkId")
     @Mapping(source = "node.id", target = "nodeId")
+//    @Mapping(target = "path", qualifiedByName = "get_path")
     public abstract TailDto map(Tail entity);
 
+
     public abstract List<TailDto> map(List<Tail> models);
+
+//    @Named("get_path")
+//    public String getTextNodePath(Long id) {
+//        return nodesService.getTextPath(id);
+//    }
 
     @Mapping(source = "linkId", target = "link", qualifiedByName = "get_link")
     @Mapping(source = "nodeId", target = "node", qualifiedByName = "get_node")
