@@ -5,8 +5,7 @@ import java.util.List;
 import vasyuk.maksim.copper_net.dto.ForUpdateNodeDto;
 import vasyuk.maksim.copper_net.dto.NodeDto;
 import vasyuk.maksim.copper_net.dto.NodePathDto;
-import vasyuk.maksim.copper_net.dto.TextNodePathDto;
-import vasyuk.maksim.copper_net.model.Node;
+import vasyuk.maksim.copper_net.dto.TailDto;
 
 public interface NodesService extends Service<NodeDto, ForUpdateNodeDto> {
     List<NodeDto> getChildren(Long parentId);
@@ -19,5 +18,5 @@ public interface NodesService extends Service<NodeDto, ForUpdateNodeDto> {
     
     NodePathDto getPath(Long nodeId);
     
-//    TextNodePathDto getTextPath(Long nodeId);
+//    List<TailDto> getTails(Long nodeId);
 }

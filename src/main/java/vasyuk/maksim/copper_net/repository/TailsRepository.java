@@ -8,4 +8,5 @@ import vasyuk.maksim.copper_net.model.Tail;
 
 public interface TailsRepository extends JpaRepository<Tail, Long> {
     List<Tail> findByLinkId(Long linkId);
+    List<Tail> findByNodeId(Long nodeId);
 }

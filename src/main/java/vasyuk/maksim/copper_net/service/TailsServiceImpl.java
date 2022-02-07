@@ -44,4 +44,8 @@ public class TailsServiceImpl implements TailsService {
         return mapper.map(model);
     }
 
+    @Override
+    public List<TailDto> getTailsByNodeId(Long nodeId) {
+        return mapper.map(repository.findByNodeId(nodeId));
+    }
 }

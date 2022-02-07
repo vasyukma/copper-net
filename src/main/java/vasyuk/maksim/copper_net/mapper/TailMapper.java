@@ -46,7 +46,7 @@ public abstract class TailMapper {
 //    @Mapping(target = "path", qualifiedByName = "get_path")
     public abstract TailDto map(Tail entity);
 
-
+//    @Mapping(source = "node.parent.id", target = "node.parentId")
     public abstract List<TailDto> map(List<Tail> models);
 
 //    @Named("get_path")
