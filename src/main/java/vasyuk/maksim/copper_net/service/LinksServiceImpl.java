@@ -31,7 +31,6 @@ public class LinksServiceImpl implements LinksService {
 
     @Override
     public List<LinkDto> getAll() {
-//        return linkMapper.map(linksRepository.findAll());
         return linkMapper.map(linksRepository.findByOrderByNameAsc());
     }
 
@@ -56,5 +55,10 @@ public class LinksServiceImpl implements LinksService {
     @Override
     public List<TailDto> getChildren(Long linkId) {
         return tailMapper.map(tailsRepository.findByLinkId(linkId));
+    }
+
+    @Override
+    public List<LinkDto> getByNameStartsWith(String name) {
+      return linkMapper.map(linksRepository.findByNameStartsWith(name));
     }
 }

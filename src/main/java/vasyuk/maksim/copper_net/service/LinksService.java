@@ -7,4 +7,5 @@ import vasyuk.maksim.copper_net.dto.TailDto;
 
 public interface LinksService extends Service<LinkDto, LinkDto> {
     List<TailDto> getChildren(Long linkId);
+    List<LinkDto> getByNameStartsWith(String name);
 }

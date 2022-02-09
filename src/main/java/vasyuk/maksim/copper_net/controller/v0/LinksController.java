@@ -1,6 +1,9 @@
 package vasyuk.maksim.copper_net.controller.v0;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +33,10 @@ public class LinksController {
         this.service = service;
     }
 
-    @GetMapping
-    private ResponseEntity<List<LinkDto>> getAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
-    }
+//    @GetMapping
+//    private ResponseEntity<List<LinkDto>> getAll() {
+//        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+//    }
 
     @GetMapping("{id}")
     public @ResponseBody ResponseEntity<LinkDto> get(@PathVariable Long id) {
@@ -42,6 +46,12 @@ public class LinksController {
     @GetMapping("{id}/tails")
     public ResponseEntity<List<TailDto>> getChildren(@PathVariable Long id) {
         return new ResponseEntity<>(service.getChildren(id), HttpStatus.OK);
+    }
+    
+    @GetMapping
+    @ResponseBody
+    public List<LinkDto> getAll(@RequestParam Optional<String> name) {
+        return service.getByNameStartsWith(name.orElse(""));
     }
 
     @PostMapping
