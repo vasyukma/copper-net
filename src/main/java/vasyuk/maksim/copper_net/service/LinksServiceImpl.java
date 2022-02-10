@@ -59,6 +59,6 @@ public class LinksServiceImpl implements LinksService {
 
     @Override
     public List<LinkDto> getByNameStartsWith(String name) {
-      return linkMapper.map(linksRepository.findByNameStartsWith(name));
+      return linkMapper.map(linksRepository.findByNameLikeOrderByNameAsc(name));
     }
 }

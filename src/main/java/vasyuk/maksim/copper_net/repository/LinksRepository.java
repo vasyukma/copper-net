@@ -8,5 +8,5 @@ import vasyuk.maksim.copper_net.model.Link;
 
 public interface LinksRepository extends JpaRepository<Link, Long> {
     List<Link> findByOrderByNameAsc();
-    List<Link> findByNameStartsWith(String name);
+    List<Link> findByNameLikeOrderByNameAsc(String filter);
 }
