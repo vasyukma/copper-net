@@ -14,26 +14,10 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Link {
+public class CrossPortInterfaceType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String name;
-    @NotNull
-    private String cableBrand;
-    @NotNull
-    private Integer cabinetLength;
-    @NotNull
-    private Integer metalStructursLength;
-    @NotNull
-    private Integer cableChannelLength;
-    @NotNull
-    private Integer reserveLength;
-    @NotNull
-    private Integer parts;
-    @NotNull
-    private Integer Length;
-    @NotNull
-    private String description;
 }

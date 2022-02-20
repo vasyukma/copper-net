@@ -3,6 +3,8 @@ package vasyuk.maksim.copper_net.controller.v0;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +17,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vasyuk.maksim.copper_net.dto.NodeTypeDto;
+import vasyuk.maksim.copper_net.model.NodeType;
+import vasyuk.maksim.copper_net.repository.NodeTypesRepository;
 import vasyuk.maksim.copper_net.service.NodeTypesService;
 
 @RestController
 @RequestMapping("api/v0/node-types")
 public class NodeTypesController {
     private NodeTypesService service;
+    private NodeTypesRepository repository;
 
     @Autowired
-    public NodeTypesController(NodeTypesService nodeTypesService) {
-        this.service = nodeTypesService;
+    public NodeTypesController(NodeTypesService service, NodeTypesRepository repository) {
+        super();
+        this.service = service;
+        this.repository = repository;
+    }
+
+    @GetMapping("depricate")
+    private ResponseEntity<List<NodeTypeDto>> getAll() {
+        return new ResponseEntity<List<NodeTypeDto>>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping
-    private ResponseEntity<List<NodeTypeDto>> getAll() {
-        return new ResponseEntity<List<NodeTypeDto>>(service.getAll(), HttpStatus.OK);
+    @ResponseBody
+    private Page<NodeType> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @GetMapping("{id}")

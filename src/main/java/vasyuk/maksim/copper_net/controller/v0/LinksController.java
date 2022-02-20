@@ -3,8 +3,6 @@ package vasyuk.maksim.copper_net.controller.v0;
 import java.util.List;
 import java.util.Optional;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +31,6 @@ public class LinksController {
         this.service = service;
     }
 
-//    @GetMapping
-//    private ResponseEntity<List<LinkDto>> getAll() {
-//        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
-//    }
-
     @GetMapping("{id}")
     public @ResponseBody ResponseEntity<LinkDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
@@ -47,7 +40,7 @@ public class LinksController {
     public ResponseEntity<List<TailDto>> getChildren(@PathVariable Long id) {
         return new ResponseEntity<>(service.getChildren(id), HttpStatus.OK);
     }
-    
+
     @GetMapping
     @ResponseBody
     public List<LinkDto> getAll(@RequestParam Optional<String> name) {
