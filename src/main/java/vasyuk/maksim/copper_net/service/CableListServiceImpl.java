@@ -40,10 +40,12 @@ public class CableListServiceImpl implements CableListService {
     @Override
     public List<CableListItemDto> getCableList() {
         NodeType rmNodeType = nodeTypesRepository.getById(5L);
-        NodeType tcNodeType = nodeTypesRepository.getById(6L);
+//        NodeType tcNodeType = nodeTypesRepository.getById(6L);
+        NodeType ppNodeType = nodeTypesRepository.getById(9L);
         List<NodeType> nodeTypesToFind = new ArrayList<>();
         nodeTypesToFind.add(rmNodeType);
-        nodeTypesToFind.add(tcNodeType);
+//        nodeTypesToFind.add(tcNodeType);
+        nodeTypesToFind.add(ppNodeType);
         List<Link> allLinks = linksRepository.findAll(Sort.by("name"));
         List<CableListItemDto> result = new ArrayList<>();
         for (Link link : allLinks) {
@@ -60,7 +62,8 @@ public class CableListServiceImpl implements CableListService {
                     room = firstFindedParentStorageLocation;
                     socket = tailStorageLocation;
                 }
-                if (firstFindedParentStorageLocation.getType().equals(tcNodeType)) {
+//                if (firstFindedParentStorageLocation.getType().equals(tcNodeType)) {
+                if (firstFindedParentStorageLocation.getType().equals(ppNodeType)) {
                     patchPanel = firstFindedParentStorageLocation;
                     telecommunicationsCloset = patchPanel.getParent();
                     port = tailStorageLocation;
