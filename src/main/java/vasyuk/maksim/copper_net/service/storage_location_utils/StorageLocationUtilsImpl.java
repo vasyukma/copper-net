@@ -22,7 +22,6 @@ public class StorageLocationUtilsImpl implements StorageLocationUtils {
 
     @Override
     public Node findFirstParentByType(Node storageLocation, List<NodeType> typesToFind) {
-//        for (Node storageLocation : storageLocationsPath) {
         for (Node currentStorageLocation : getPath(storageLocation)) {
             if (typesToFind.contains(currentStorageLocation.getType())) {
                 return currentStorageLocation;
@@ -33,19 +32,14 @@ public class StorageLocationUtilsImpl implements StorageLocationUtils {
 
     @Override
     public List<Node> getPath(Node storageLocation) {
-//        Deque<Node> modelDeque = new ArrayDeque<>();
         List<Node> result = new ArrayList<>();
         Long rootStorageLocationId = repository.getRoot().getId();
         Node currentStorageLocation = repository.getById(storageLocation.getId());
-//        modelDeque.add(currentNode);
         result.add(currentStorageLocation);
         while (rootStorageLocationId != currentStorageLocation.getId()) {
             currentStorageLocation = repository.getById(currentStorageLocation.getParent().getId());
-//            modelDeque.add(currentNode);
             result.add(currentStorageLocation);
         }
-//        List<Node> result = new ArrayList<>(modelDeque);
-//        return modelDeque;
         return result;
     }
 }
